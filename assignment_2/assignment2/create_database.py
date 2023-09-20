@@ -55,7 +55,8 @@ user_ids = os.listdir(subDir)
 labeled_ids_dir = "./dataset/labeled_ids.txt"
 labeled_ids = open(labeled_ids_dir, "r").read().strip().split("\n")
 
-for i in tqdm(range(len(user_ids))):
+num_users = len(user_ids)
+for i in tqdm(range(num_users)):
     user_id = user_ids[i]
     if user_id.startswith("."):
         continue
@@ -70,7 +71,7 @@ for i in tqdm(range(len(user_ids))):
             trip_id = cursor.lastrowid
             trajectory_file_path = path + "/" + f
             with open(trajectory_file_path, "r") as trajectory_file:
-                lines = trajectory_file.read().strip().split("\n")[6:-1]
+                lines = trajectory_file.read().strip().split("\n")[6:]
                 for line in lines:
                     data = line.split(",")
                     latitude = float(data[0])
